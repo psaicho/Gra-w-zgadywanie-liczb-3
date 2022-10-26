@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Guess..</title>
+</head>
+<body>
+{% if method == "POST" %}
+    {% if choice == "YOUWIN" %}
+        <p>You WIN</p>
+        <form action="/" method="GET">
+        <input type="submit"  value="Try Again">
+        </form>
+    {% else %}
+    <p>I guess Your number is ... {{guess}}</p>
+    <form action="/" method="POST">
+        <input type="submit" name="choice" value="YOUWIN">
+        <input type="submit" name="choice" value="TOSMALL">
+        <input type="submit" name="choice" value="TOBIG">
+        <input type="hidden" name="min" value="{{min}}">
+        <input type="hidden" name="max" value="{{max}}">
+
+    </form>
+    {% endif %}
+{% else %}
+<form action="/" method="POST">
+    <p>Think of any number between 1 and 1000, I'll try guess it  </p>
+    <input type="hidden" name="choice" value="START">
+    <input type="hidden" name="min" value="1">
+    <input type="hidden" name="max" value="1000">
+    <button type="submit">Start</button>
+</form>
+{% endif %}
+
+
+</body>
