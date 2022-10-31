@@ -14,12 +14,20 @@ def game():
         min = int(request.form["min"])
         max = int(request.form["max"])
         guess = int((max - min) / 2 + min)
-        if choice == 'YOUWIN':
-            return render_template('Guess.html', method=method, choice=choice)
+
+        if max - min < 2:
+            choice = "You cheated!"
+            return render_template('Guess.html', method=method, \
+                                   guess=guess, min=min, max=max, choice=choice)
+        if choice == 'You Win!':
+            choice = "I Win!"
+            return render_template('Guess.html', method=method, \
+                                   guess=guess, min=min, max=max, choice=choice)
         else:
-            if choice == "TOBIG":
+            result = ""
+            if choice == "To Big":
                 max = guess
-            elif choice == "TOSMALL":
+            elif choice == "To Small":
                 min = guess
             elif choice == "START":
                 guess = guess
